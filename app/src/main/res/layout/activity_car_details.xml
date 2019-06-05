@@ -7,9 +7,10 @@
     tools:context=".CarDetailsActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/carImageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:contentDescription="@string/vehicule_photo"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/carTitleTextView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,9 +26,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="28dp"
-        android:text="best car"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/carImageView" />
 
     <TextView
         android:id="@+id/carPriceTextView"
@@ -36,7 +36,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="$150.0"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carTitleTextView" />
@@ -59,7 +58,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:text="15miles"
         app:layout_constraintStart_toEndOf="@+id/carPriceTextView"
         app:layout_constraintTop_toBottomOf="@+id/carTitleTextView" />
 
@@ -71,12 +69,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/callDealerButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/carVehicleInfoLabel">
 
         <!-- Divide the constraintLayout into two equal parts -->
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/horizontal_middle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,7 +93,6 @@
             android:id="@+id/carLocationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New_york"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,7 +108,6 @@
             android:id="@+id/carExteriorColorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blue"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carLocationTextView" />
 
@@ -127,7 +123,6 @@
             android:id="@+id/carInteriorColorTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Blue"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carExteriorColorTextView" />
 
@@ -143,7 +138,6 @@
             android:id="@+id/carDriveTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FWD"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carInteriorColorTextView" />
 
@@ -159,7 +153,6 @@
             android:id="@+id/carTransmissionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Automatic"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carDriveTypeTextView" />
 
@@ -175,7 +168,6 @@
             android:id="@+id/carBodyStyleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sedan"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carTransmissionTextView" />
 
@@ -191,7 +183,6 @@
             android:id="@+id/carEngineTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4 Cyl 2.4"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carBodyStyleTextView" />
 
@@ -199,7 +190,6 @@
             android:id="@+id/carFuelLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fuel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/carEngineLabel" />
 
@@ -207,14 +197,13 @@
             android:id="@+id/carFuelTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gasoline"
             app:layout_constraintStart_toStartOf="@+id/horizontal_middle"
             app:layout_constraintTop_toBottomOf="@id/carEngineTextView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/callDealerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp">
@@ -19,6 +18,7 @@
                 android:id="@+id/carImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:contentDescription="@string/vehicule_photo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="2011 bmw"
                 app:layout_constraintTop_toBottomOf="@+id/carImageView"
                 />
 
@@ -40,7 +39,6 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
-                android:text="$17 230"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/carTitleTextView" />
 
@@ -49,7 +47,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="39.1 km"
                 app:layout_constraintTop_toBottomOf="@+id/carTitleTextView"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -58,7 +55,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Highland Park, IL"
                 app:layout_constraintTop_toBottomOf="@+id/carPriceTextView"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -67,7 +63,6 @@
                 android:id="@+id/callDealerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CALL DEALER"
                 app:layout_constraintTop_toBottomOf="@+id/carLocationTextView"
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

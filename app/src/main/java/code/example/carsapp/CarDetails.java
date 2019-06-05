@@ -17,9 +17,16 @@ public class CarDetails {
     private String driveType;
     private String transmission;
     private String bodyType;
+    private String fuel;
     private String photo;
+    private String city;
+    private String state;
 
-    public CarDetails(String vin, int year, String make, String model, String trim, String subTrim, String phone, int mileage, float currentPrice, String exteriorColor, String interiorColor, String engine, String driveType, String transmission, String bodyType, String photo) {
+    public CarDetails(String vin, int year, String make, String model, String trim,
+                      String subTrim, String phone, int mileage, float currentPrice,
+                      String exteriorColor, String interiorColor, String engine,
+                      String driveType, String transmission, String bodyType,
+                      String fuel, String photo, String city, String state) {
         this.vin = vin;
         this.year = year;
         this.make = make;
@@ -35,7 +42,10 @@ public class CarDetails {
         this.driveType = driveType;
         this.transmission = transmission;
         this.bodyType = bodyType;
+        this.fuel = fuel;
         this.photo = photo;
+        this.city = city;
+        this.state = state;
     }
 
     public String getVin() {
@@ -158,11 +168,35 @@ public class CarDetails {
         this.bodyType = bodyType;
     }
 
+    public String getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
     public String getPhoto() {
         return photo;
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
