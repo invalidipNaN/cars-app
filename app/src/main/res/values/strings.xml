@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CarsApp</string>
+    <string name="vehicule_info">Vehicle Info</string>
+    <string name="call_dealer">Call dealer</string>
+    <string name="location">Location</string>
+    <string name="exterior_color">Exterior Color</string>
+    <string name="interior_color">Interior Color</string>
+    <string name="drive_type">Drive Type</string>
+    <string name="transmission">Transmission</string>
+    <string name="body_style">Body Style</string>
+    <string name="engine">Engine</string>
+    <string name="fuel">Fuel</string>
+
 </resources>
