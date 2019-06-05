@@ -1,9 +1,12 @@
 package code.example.carsapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,7 +36,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CarViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final CarViewHolder holder, int position) {
         CarDetails car = mCarDetailsList.get(position);
         String currentUrl = car.getPhoto();
 
@@ -43,10 +46,21 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
 
         String title = car.getYear() + " "+  car.getMake() + " " + car.getModel() +
                 " "+ car.getTrim() +" "+ car.getSubTrim();
+        final String phoneNumer = car.getPhone();
+
         holder.carTitle.setText(title);
         holder.carPrice.setText(""+car.getCurrentPrice());
         holder.carMileage.setText(""+car.getMileage());
-
+        holder.callDealerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + phoneNumer ));
+                    if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+                        mContext.startActivity(intent);
+                    }
+            }
+        });
     }
 
     @Override
@@ -75,6 +89,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
         TextView carPrice;
         TextView carMileage;
         TextView carLocation;
+        Button callDealerButton;
         public CarViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -83,6 +98,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
             carPrice = itemView.findViewById(R.id.carPriceTextView);
             carMileage = itemView.findViewById(R.id.carMileageTextView);
             carLocation = itemView.findViewById(R.id.carLocationTextView);
+            callDealerButton = itemView.findViewById(R.id.callDealerButton);
         }
     }
 }
