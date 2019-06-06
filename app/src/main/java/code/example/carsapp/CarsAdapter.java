@@ -1,7 +1,8 @@
 package code.example.carsapp;
 
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
 
         Glide.with(mContext)
                 .load(currentUrl)
+                //.placeholder(new ColorDrawable(Color.RED))
                 .into(holder.carImage);
 
         String title = car.getYear() + " "+  car.getMake() + " " + car.getModel() +
@@ -116,7 +118,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
         @Override
         public void onClick(View v) {
             CarDetails car = mCarDetailsList.get(getAdapterPosition());
-            Log.i("SSSS","I'm HERE");
             mItemClickListener.onItemClickListener(car);
         }
     }

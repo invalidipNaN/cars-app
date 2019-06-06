@@ -1,75 +1,90 @@
 package code.example.carsapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.util.ArrayList;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
+
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.widget.LinearLayout.VERTICAL;
 
 public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemClickListener{
 
+    private MainActivityViewModel mViewModel;
     private RecyclerView mCarsRecyclerView;
     private CarsAdapter mCarsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCarsRecyclerView = findViewById(R.id.recyclerViewCars);
-        mCarsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //Setup the viewModel
+        setupViewModel();
 
+        //Set the RecyclerView
+        setupRecyclerView();
+
+        //Set the adapter
         mCarsAdapter = new CarsAdapter(this, this);
+        populateAdapter();
 
         mCarsRecyclerView.setAdapter(mCarsAdapter);
+
+        InternetDataSource.fetchCarsData();
+
+    }
+
+    private void setupRecyclerView(){
+        mCarsRecyclerView = findViewById(R.id.recyclerViewCars);
+        mCarsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(),
                 VERTICAL);
         mCarsRecyclerView.addItemDecoration(decoration);
+    }
 
-        List<CarDetails> mList = new ArrayList<>();
-        String photoUrl  = "https://carfax-img.vast.com/carfax/-6601530003191280406/1/640x480";
-        String photo2Url = "https://carfax-img.vast.com/carfax/-9050308143659109979/1/640x480";
-        CarDetails bmw = new CarDetails("hjhdsjqhjds",2014,"BMW","Seri",
-                "ds","i25","56515545",526,2356.0f,
-                "Black","Red","V2","SSS",
-                "manual","DS","Electric",photoUrl,"Nevada",
-                "Nevada");
-        CarDetails bk = new CarDetails("tyuaeizae",2016,"Audi","dsq",
-                "ds","i25","56515545",526,2356.0f,
-                "Blue","Red","V2","SSS",
-                "manual","DS","Gazoline",photo2Url,"Los angeles",
-                "CA");
-        mList.add(bmw);
-        mList.add(bk);
-        mList.add(bmw);
-        mList.add(bk);
-        mList.add(bmw);
-        mList.add(bk);
-        mCarsAdapter.setmCarDetailsList(mList);
+    private void setupViewModel() {
+        mViewModel = ViewModelProviders.of(this)
+                .get(MainActivityViewModel.class);
+    }
+
+    private void populateAdapter(){
+        Disposable r = mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<List<CarDetails>>() {
+                    @Override
+                    public void accept(List<CarDetails> carDetails) throws Exception {
+                        mCarsAdapter.setmCarDetailsList(carDetails);
+                    }
+                });
     }
 
     @Override
     public void onItemClickListener(CarDetails car) {
         String photo = car.getPhoto();
-        String title = car.getYear() + " "+  car.getMake() + " " + car.getModel() +
-                " "+ car.getTrim() +" "+ car.getSubTrim();
+        String title = CarDetails.title(car);
 
-        String price = "$ "+ car.getCurrentPrice();
-        String mileage = car.getMileage() + "k mi";
-        String location = car.getCity() + ", " + car.getState();
+        String price = CarDetails.formattedPrice(car);
+        String mileage = CarDetails.formattedMileage(car);
+        String location = CarDetails.location(car);
         String exteriorColor = car.getExteriorColor();
         String interiorColor = car.getInteriorColor();
         String driveType = car.getDriveType();
         String transmission = car.getTransmission();
         String bodyStyle = car.getBodyType();
-        String engine = car.getEngine();
+        String engine = CarDetails.formattedEngine(car);
         String fuel = car.getFuel();
         String phone = car.getPhone();
 

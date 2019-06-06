@@ -14,6 +14,7 @@ public class CarDetails {
     private String exteriorColor;
     private String interiorColor;
     private String engine;
+    private String displacement;
     private String driveType;
     private String transmission;
     private String bodyType;
@@ -22,11 +23,11 @@ public class CarDetails {
     private String city;
     private String state;
 
-    public CarDetails(String vin, int year, String make, String model, String trim,
-                      String subTrim, String phone, int mileage, float currentPrice,
-                      String exteriorColor, String interiorColor, String engine,
-                      String driveType, String transmission, String bodyType,
-                      String fuel, String photo, String city, String state) {
+    public CarDetails(String vin, int year, String make, String model, String trim, String subTrim,
+                      String phone, int mileage, float currentPrice, String exteriorColor,
+                      String interiorColor, String engine, String displacement, String driveType,
+                      String transmission, String bodyType, String fuel, String photo, String city,
+                      String state) {
         this.vin = vin;
         this.year = year;
         this.make = make;
@@ -39,6 +40,7 @@ public class CarDetails {
         this.exteriorColor = exteriorColor;
         this.interiorColor = interiorColor;
         this.engine = engine;
+        this.displacement = displacement;
         this.driveType = driveType;
         this.transmission = transmission;
         this.bodyType = bodyType;
@@ -144,6 +146,14 @@ public class CarDetails {
         this.engine = engine;
     }
 
+    public String getDisplacement() {
+        return displacement;
+    }
+
+    public void setDisplacement(String displacement) {
+        this.displacement = displacement;
+    }
+
     public String getDriveType() {
         return driveType;
     }
@@ -198,5 +208,29 @@ public class CarDetails {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public static String title(CarDetails car){
+        String trim = (!car.getTrim().equals("Unspecified")) ? car.getTrim() : "";
+        String subTrim = (!car.getSubTrim().equals("Unspecified")) ? car.getSubTrim() : "";
+
+        return car.getYear() + " "+  car.getMake() + " " + car.getModel() +
+                " "+ trim +" "+ subTrim;
+    }
+
+    public static String formattedPrice(CarDetails car){
+        return "$ "+ car.getCurrentPrice();
+    }
+
+    public static String formattedMileage(CarDetails car){
+        return car.getMileage() + "k mi";
+    }
+
+    public static String location(CarDetails car){
+        return car.getCity() + ", " + car.getState();
+    }
+
+    public static String formattedEngine(CarDetails car){
+        return car.getEngine()+ " " + car.getDisplacement();
     }
 }
