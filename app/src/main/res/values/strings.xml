@@ -11,5 +11,7 @@
     <string name="body_style">Body Style</string>
     <string name="engine">Engine</string>
     <string name="fuel">Fuel</string>
-
+    <string name="mock_text">mock_text</string>
+    <string name="horizontal_divider">horizontal divider</string>
+    <string name="vertical_divider">vertical_divider</string>
 </resources>

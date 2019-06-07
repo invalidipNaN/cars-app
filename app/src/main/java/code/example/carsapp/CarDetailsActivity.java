@@ -18,7 +18,7 @@ public class CarDetailsActivity extends AppCompatActivity {
     public static final String EXTRA_TITLE = "extraTitle";
     public static final String EXTRA_PRICE= "extraPrice";
     public static final String EXTRA_MILEAGE= "extraMileage";
-    public static final String EXTRA_LOCATION= "extraPrice";
+    public static final String EXTRA_LOCATION= "extraLocation";
     public static final String EXTRA_EXTERIOR_COLOR= "extraExteriorColor";
     public static final String EXTRA_INTERIOR_COLOR= "extraInteriorColor";
     public static final String EXTRA_DRIVE_TYPE = "extraDriveType";
@@ -71,7 +71,8 @@ public class CarDetailsActivity extends AppCompatActivity {
 
         mTitleTextView.setText(title);
 
-        mPriceTextView .setText(price);
+        String priceMileage = price + " | ";
+        mPriceTextView .setText(priceMileage);
 
         mMileageTextView.setText(mileage);
 
@@ -91,12 +92,8 @@ public class CarDetailsActivity extends AppCompatActivity {
 
         mFuelTextView.setText(fuel);
 
-        mCallDealerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.startPhoneIntent(getApplicationContext(),phone);
-            }
-        });
+        mCallDealerButton.setOnClickListener(
+                l->IntentUtils.startPhoneIntent(getApplicationContext(),phone));
     }
 
     public void setUI(){
