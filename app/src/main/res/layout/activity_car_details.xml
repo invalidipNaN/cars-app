@@ -87,10 +87,11 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontal_divider" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/vehiculeDetailsConstraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
@@ -243,18 +244,29 @@
                 app:layout_constraintTop_toBottomOf="@id/carEngineTextView"
                 tools:text="@string/mock_text"
                 android:textColor="@color/black"/>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/horizontal_divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@color/dGray"
+            android:contentDescription="@string/horizontal_divider"
+            app:layout_constraintBottom_toTopOf="@+id/callDealerButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vehiculeDetailsConstraintLayout" />
 
         <Button
             android:id="@+id/callDealerButton"
+            style="@style/ButtonStyleDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:text="@string/call_dealer"
-            style="@style/ButtonStyleDetail"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/horizontal_divider2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,8 +1,6 @@
 package code.example.carsapp;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +49,11 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
                 //.placeholder(new ColorDrawable(Color.RED))
                 .into(holder.carImage);
 
-        String title = car.getYear() + " "+  car.getMake() + " " + car.getModel() +
-                " "+ car.getTrim() +" "+ car.getSubTrim();
+        String title = CarDetails.title(car);
+        String price = CarDetails.formattedPrice(car);
+        String mileage = CarDetails.formattedMileage(car);
+        String location = CarDetails.location(car);
 
-        String location = car.getCity() + ", " + car.getState();
-        String price = "$ "+ car.getCurrentPrice();
-        String mileage = car.getMileage() + "k mi";
 
         final String phoneNumber = car.getPhone();
 
@@ -68,12 +65,8 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
         /*
             Create an intent to call the car dealer
          */
-        holder.callDealerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IntentUtils.startPhoneIntent(mContext,phoneNumber);
-            }
-        });
+        holder.callDealerButton.setOnClickListener(
+                e->IntentUtils.startPhoneIntent(mContext,phoneNumber));
     }
 
     @Override
