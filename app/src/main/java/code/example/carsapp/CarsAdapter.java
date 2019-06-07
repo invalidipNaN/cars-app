@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import code.example.carsapp.Utils.IntentUtils;
@@ -24,7 +25,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.CarViewHolder>
     private Context mContext;
     private ItemClickListener mItemClickListener;
 
-    private List<CarDetails> mCarDetailsList;
+    private List<CarDetails> mCarDetailsList = new ArrayList<>();
 
     public CarsAdapter(Context mContext, ItemClickListener itemClickListener) {
 

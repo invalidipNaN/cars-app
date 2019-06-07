@@ -22,6 +22,7 @@ import static android.widget.LinearLayout.VERTICAL;
 
 public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemClickListener{
 
+    private static final String TAG = MainActivity.class.getSimpleName();
     private MainActivityViewModel mViewModel;
     private RecyclerView mCarsRecyclerView;
     private CarsAdapter mCarsAdapter;
@@ -63,12 +64,10 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     private void populateAdapter(){
         Disposable r = mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<CarDetails>>() {
-                    @Override
-                    public void accept(List<CarDetails> carDetails) throws Exception {
-                        mCarsAdapter.setmCarDetailsList(carDetails);
-                    }
-                });
+                .subscribe(
+                        carDetails -> { mCarsAdapter.setmCarDetailsList(carDetails); },
+                        throwable -> Log.e(TAG, "Throwable " + throwable.getMessage())
+                );
     }
 
     @Override
