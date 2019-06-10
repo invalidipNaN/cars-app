@@ -1,5 +1,8 @@
 package code.example.carsapp;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class CarDetails {
 
     private String vin;
@@ -219,11 +222,12 @@ public class CarDetails {
     }
 
     public static String formattedPrice(CarDetails car){
-        return "$ "+ car.getCurrentPrice();
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
+        return  formatter.format(car.getCurrentPrice());
     }
 
     public static String formattedMileage(CarDetails car){
-        return car.getMileage() + "k mi";
+        return car.getMileage()/1000 + "k mi";
     }
 
     public static String location(CarDetails car){
