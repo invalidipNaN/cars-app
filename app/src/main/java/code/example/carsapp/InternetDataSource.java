@@ -3,7 +3,7 @@ package code.example.carsapp;
 import android.annotation.SuppressLint;
 
 import code.example.carsapp.DataSourceClasses.CarSearchResult;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,7 +14,7 @@ public class InternetDataSource {
             "https://carfax-for-consumers.firebaseio.com/";
 
     @SuppressLint("CheckResult")
-    public static Single<CarSearchResult> fetchCarsData(){
+    public static Observable<CarSearchResult> fetchCarsData(){
         Retrofit retrofitInstance = new Retrofit.Builder()
                 .baseUrl(sourceBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())

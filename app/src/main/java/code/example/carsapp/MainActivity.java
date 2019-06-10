@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.widget.LinearLayout.VERTICAL;
@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     private MainActivityViewModel mViewModel;
     private RecyclerView mCarsRecyclerView;
     private CarsAdapter mCarsAdapter;
+
+    //Used for RxJava Cleanup
+    private CompositeDisposable mCompositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +61,13 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     }
 
     private void populateAdapter(){
-        Disposable r = mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
+        mCompositeDisposable.add(mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         carDetails -> { mCarsAdapter.setmCarDetailsList(carDetails); },
                         throwable -> Log.e(TAG, "Throwable " + throwable.getMessage())
-                );
+                )
+        );
     }
 
     @Override
@@ -101,5 +105,11 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
         intent.putExtra(CarDetailsActivity.EXTRA_PHONE, phone);
 
         startActivity(intent);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mCompositeDisposable.dispose();
     }
 }
