@@ -3,6 +3,8 @@ package code.example.carsapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     private static final String TAG = MainActivity.class.getSimpleName();
     private MainActivityViewModel mViewModel;
     private RecyclerView mCarsRecyclerView;
+    private ProgressBar mCarListProgressBar;
     private CarsAdapter mCarsAdapter;
 
     //Used for RxJava Cleanup
@@ -53,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(),
                 VERTICAL);
         mCarsRecyclerView.addItemDecoration(decoration);
+        mCarListProgressBar = findViewById(R.id.carListProgressBar);
     }
 
     private void setupViewModel() {
@@ -64,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
         mCompositeDisposable.add(mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        carDetails -> { mCarsAdapter.setmCarDetailsList(carDetails); },
+                        carDetails -> {
+                            mCarListProgressBar.setVisibility(View.INVISIBLE);
+                            mCarsAdapter.setmCarDetailsList(carDetails);
+                            },
                         throwable -> Log.e(TAG, "Throwable " + throwable.getMessage())
                 )
         );
