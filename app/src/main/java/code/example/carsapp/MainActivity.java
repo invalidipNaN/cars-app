@@ -21,7 +21,7 @@ import static android.widget.LinearLayout.VERTICAL;
 public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemClickListener{
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private MainActivityViewModel mViewModel;
+    private MainActivityViewModel mCarsViewModel;
     private RecyclerView mCarsRecyclerView;
     private ProgressBar mCarListProgressBar;
     private CarsAdapter mCarsAdapter;
@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
 
         mCarsRecyclerView.setAdapter(mCarsAdapter);
 
-        InternetDataSource.fetchCarsData();
+        //Call the ViewModel to get the data
+        fetchCarsData();
 
     }
 
@@ -60,12 +61,16 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     }
 
     private void setupViewModel() {
-        mViewModel = ViewModelProviders.of(this)
+        mCarsViewModel = ViewModelProviders.of(this)
                 .get(MainActivityViewModel.class);
     }
 
+    private void fetchCarsData(){
+        mCarsViewModel.fetchCarsData();
+    }
+
     private void populateAdapter(){
-        mCompositeDisposable.add(mViewModel.getmCarDetailsList().subscribeOn(Schedulers.io())
+        mCompositeDisposable.add(mCarsViewModel.getCarDetailsSubject().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         carDetails -> {
