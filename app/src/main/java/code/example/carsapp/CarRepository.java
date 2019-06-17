@@ -19,17 +19,21 @@ public class CarRepository {
 
             if(listings != null){
                 for(Listing l: listings){
-                    String photo =
-                            (l.getImages() != null )?l.getImages().getBaseUrl()+"1/640x480":"";
-                    result.add(new CarDetails(l.getVin(),l.getYear(),l.getMake(),l.getModel(),
-                            l.getTrim(),l.getSubTrim(),l.getDealer().getPhone(),l.getMileage(),
-                            l.getCurrentPrice(),l.getExteriorColor(),l.getInteriorColor​(),
-                            l.getEngine​(),l.getDisplacement(),l.getDrivetype(),l.getTransmission(),
-                            l.getBodytype​(),l.getFuel(),photo,
-                            l.getDealer().getCity(),l.getDealer().getState()));
+                    result.add(listingToCarDetails(l));
                 }
             }
             return result;
         });
+    }
+
+    private static CarDetails listingToCarDetails(Listing l){
+        String photo =
+                (l.getImages() != null )?l.getImages().getBaseUrl()+"1/640x480":"";
+        return new CarDetails(l.getVin(),l.getYear(),l.getMake(),l.getModel(),
+                l.getTrim(),l.getSubTrim(),l.getDealer().getPhone(),l.getMileage(),
+                l.getCurrentPrice(),l.getExteriorColor(),l.getInteriorColor​(),
+                l.getEngine​(),l.getDisplacement(),l.getDrivetype(),l.getTransmission(),
+                l.getBodytype​(),l.getFuel(),photo,
+                l.getDealer().getCity(),l.getDealer().getState());
     }
 }
