@@ -123,5 +123,6 @@ public class MainActivity extends AppCompatActivity implements CarsAdapter.ItemC
     protected void onStop() {
         super.onStop();
         mCompositeDisposable.dispose();
+        mCarsViewModel.stopModelViewSubject();
     }
 }

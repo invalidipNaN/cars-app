@@ -36,5 +36,8 @@ public class MainActivityViewModel extends AndroidViewModel {
                         )));
     }
 
+    public void stopModelViewSubject(){
+        mCompositeDisposable.dispose();
+    }
 
 }
